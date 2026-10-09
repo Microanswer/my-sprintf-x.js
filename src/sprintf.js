@@ -81,12 +81,15 @@
                         arg = JSON.stringify(arg, null, ph.width ? parseInt(ph.width) : 0)
                         break
                     case 'e':
+                        if (ph.precision < 0 || 100 < ph.precision) throw new Error('[sprintf] e precision must be between 0 and 100')
                         arg = ph.precision ? parseFloat(arg).toExponential(ph.precision) : parseFloat(arg).toExponential()
                         break
                     case 'f':
+                        if (ph.precision < 0 || 100 < ph.precision) throw new Error('[sprintf] f precision must be between 0 and 100')
                         arg = ph.precision ? parseFloat(arg).toFixed(ph.precision) : parseFloat(arg)
                         break
                     case 'g':
+                        if (ph.precision < 1 || 100 < ph.precision) throw new Error('[sprintf] g precision must be between 1 and 100')
                         arg = ph.precision ? String(Number(arg.toPrecision(ph.precision))) : parseFloat(arg)
                         break
                     case 'o':
